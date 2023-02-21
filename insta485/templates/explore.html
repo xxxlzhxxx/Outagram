@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <title>insta485</title>
+    <link rel="icon" href="/uploads/instaLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body style="background-color:rgb(245, 243, 248);">
+    <!--Top of the page hyperlinks-->
+
+    <nav class="navbar navbar-light" style="overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    height: 3cm;
+    color: rgb(245, 243, 248);
+    width: 100%;">
+
+      <div class="topnav-left">
+        <a href="/"><img src="/uploads/instaLogo.png" height="50" width="50" alt="Picture of a simplified camera (Instagram logo)"></a>
+        <span class="topnav-Company">Outagram</span>
+      </div>
+      <div class="topnav-right">
+        <span class="button">
+          <a href="/explore/">explore</a>
+        </span>
+        <span>
+          <a>|</a>
+      </span>
+        <span class="button">
+          <a href="/users/{{ logname }}/">{{ logname }}</a>
+        </span>
+      </div>
+    </nav>
+
+
+    <div style="padding: 4cm; z-index: -1; width: 60%; margin: auto;">
+        {% for user in not_following %}
+        <div style="border: solid; margin-bottom: 1cm;">
+            <span>
+                <img src="{{ user.user_img_url }}" href="/users/{{ user.username }}/" alt="hello" height="100"
+                    width="100" style="padding: 5px;">
+            </span>
+            <span>
+                <a href="/users/{{ user.username }}/" style="color: black; font-size: x-large; font-weight: bolder;">
+                    {{ user.username }}
+                </a>
+                <div style="display: inline-block; padding-right: 1cm;">
+                    <form method="post" action="/following/" >
+                        <input type="hidden" name="target" value="/explore/">
+                        <input type="hidden" name="username" value="{{user.username}}">
+                        <input type="hidden" name="operation" value="follow">
+                        <input type="submit" name="follow" value="follow">
+                    </form>
+                </div>
+           
+        </span>
+
+            <!-- button to follow the user -->
+
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/static/css/index.css">
+  <title>insta485</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+    <body style="background-color:rgb(245, 243, 248);">
+        <!--Top of the page hyperlinks-->
+
+        <nav class="navbar navbar-light" style="overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    height: 3cm;
+    color: rgb(245, 243, 248);
+    width: 100%;">
+
+      <div class="topnav-left">
+        <a href="/"><img src="/uploads/instaLogo.png" height="50" width="50" alt="Picture of a simplified camera (Instagram logo)"></a>
+        <span class="topnav-Company">Outagram</span>
+      </div>
+      <div class="topnav-right">
+        <span class="button">
+          <a href="/explore/">explore</a>
+        </span>
+        <span>
+          <a>|</a>
+      </span>
+        <span class="button">
+          <a href="/users/{{ logname }}/">{{ logname }}</a>
+        </span>
+      </div>
+    </nav>
+
+        <hr class="new" style="width: 95%;">
+
+         <!--Post-->
+         <div class="card boarder-dark mb-3 mx-auto" style="margin-top: 3cm; width: 600px;">
+            <!--Header-->
+            <div class="card-header">
+              <span class="card-header-left">
+                <a href="/users/{{ post[0].owner }}/"> <!--Take a look at this uhhhh-->
+                  <img src="/uploads/{{ user[0].filename }}" height="30" width="30" alt="Picture of awdeorio"> <b class="user"> {{ post[0].owner }} </b>
+                </a>
+              </span>
+              <span class="card-header-right">
+                <a href="{{ url_for('show_post', postid_url_slug=post[0].postid) }}"> <!--Here too uhhhh-->
+                  {{ post[0].created }}
+                </a>
+              </span>
+            </div>
+  
+            <!--Post Content--> <!--Here as well uhhhh-->
+            <img class="card-img-top" src="/uploads/{{ post[0].filename }}" alt="Picture of chickens in a coop with chicks">
+  
+            <!--Post Feedback-->
+            <div>
+              <div class="user">
+                {{ likes | length }}
+                {% if likes | length == 1%}
+                  <span>like</span> 
+                {% else %}
+                  <span>likes</span>
+                {% endif %}
+  
+              </div>
+              <div class="comment">
+                {% for comment in comments %}
+                  <div><b><a href="/users/{{ comment.owner }}/">{{ comment.owner }}</a></b> {{ comment.text }}</div>
+                  <!-- Delete button for comments owned by logged in user -->
+                  {% if comment.owner == logname %}
+                    <form action="/comments/?target={{ url_for('show_post', postid_url_slug=post[0].postid) }}" method="post" enctype="multipart/form-data">
+                      <input type="hidden" name="operation" value="delete"/>
+                      <input type="hidden" name="commentid" value="{{ comment.commentid }}"/>
+                      <input type="submit" name="uncomment" value="delete"/>
+                    </form>
+                  {% endif %}
+                {% endfor %}
+                </div>
+
+                <!-- Like/Unlike Button -->
+                <div class="like">
+                  {% if user_liked == 0 %}
+                    <form action="/likes/?target={{ url_for('show_post', postid_url_slug=post[0].postid) }}" method="post" enctype="multipart/form-data">
+                      <input type="hidden" name="operation" value="like"/>
+                      <input type="hidden" name="postid" value="{{ post[0].postid }}"/>
+                      <input type="submit" name="like" value="like"/>
+                    </form>
+                  {% else %}
+                    <form action="/likes/?target={{ url_for('show_post', postid_url_slug=post[0].postid) }}" method="post" enctype="multipart/form-data">
+                      <input type="hidden" name="operation" value="unlike"/>
+                      <input type="hidden" name="postid" value="{{ post[0].postid }}"/>
+                      <input type="submit" name="unlike" value="unlike"/>
+                    </form>
+                  {% endif %}
+                </div>
+
+                <!-- Comment Form -->
+                <form action="/comments/?target={{ url_for('show_post', postid_url_slug=post[0].postid) }}" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="operation" value="create"/>
+                  <input type="hidden" name="postid" value="{{ post[0].postid }}"/>
+                  <input type="text" name="text" required/>
+                  <input type="submit" name="comment" value="comment"/>
+                </form>
+
+                <!-- Delete button if logged in user owns post -->
+                <div class="delete"> 
+                  {% if post[0].owner == logname %}
+                    <form action="/posts/?target=/users/{{ logname }}" method="post" enctype="multipart/form-data">
+                      <input type="hidden" name="operation" value="delete"/>
+                      <input type="hidden" name="postid" value="{{ post[0].postid }}"/>
+                      <input type="submit" name="delete" value="delete this post"/>
+                    </form>
+                  {% endif %}
+                </div>
+
+            </div>
+          </div>
+    </body>
+</html>

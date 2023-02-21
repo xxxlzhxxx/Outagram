@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+    <title>insta485</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<!--Background color does not change-->
+
+<body style="background-color:rgb(245, 243, 248);">
+
+    <!--Hyperlinks at the top of the page-->
+    <nav class="navbar navbar-light" style="overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    height: 3cm;
+    color: rgb(245, 243, 248);
+    width: 100%;">
+        <!--Instagram Logo and Company Name (top right)-->
+        <div class="topnav-left">
+            <a href="/"><img src="/uploads/instaLogo.png" height="60" width="60"
+                    alt="Picture of a simplified camera (Instagram logo)"></a>
+            <span class="topnav-Company">Outagram</span>
+        </div>
+        <!--Explore Button + Profile Page Button-->
+        <div class="topnav-right">
+            <span class="button">
+                <a href="/explore/">explore</a>
+            </span>
+            <span class="button">
+                <a href="/users/{% block loggedInUser %}/">{{ self.loggedInUser() }}</a>
+            </span>
+        </div>
+    </nav>
+
+    <!--Bar at the bottom of the top navigation. Separates content from nav bar-->
+    <hr class="new" style="width: 95%;">
+
+</body>
+
+</html>
