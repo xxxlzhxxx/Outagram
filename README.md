@@ -3,4 +3,4 @@ This is a online social media platform which inclues the major function of Insta
 To start the program, first run the virtual environment.
 
 screenshots:
-![Image text](https://raw.github.com/xxxlzhxxx/Outagram/index.jpg)
+![Image text](https://raw.github.com/xxxlzhxxx/Outagram/master/index.jpg)
