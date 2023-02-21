@@ -5,4 +5,5 @@ To start the program, first run the virtual environment. Make sure all the packa
 Some screenshots:
 ![Image text](https://github.com/xxxlzhxxx/Outagram/blob/master/login.png)
 ![Image text](https://github.com/xxxlzhxxx/Outagram/blob/master/index.png)
+![Image text](https://github.com/xxxlzhxxx/Outagram/blob/master/explore.png)
 ![Image text](https://github.com/xxxlzhxxx/Outagram/blob/master/user.png)
