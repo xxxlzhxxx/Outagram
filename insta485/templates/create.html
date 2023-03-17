@@ -34,20 +34,37 @@
   <hr class="new" style="width: 95%;">
 
   <!-- DO NOT CHANGE THIS (aside from styling) -->
-  <div style="padding: 2cm; z-index: -1;">
+  <div class="center" style="padding-top: 3cm; z-index: -1;">
     <form action="/accounts/?target=/" method="post" enctype="multipart/form-data">
       <div class="container">
-        <div>Photo <input type="file" name="file" required /></div>
-        <div>Name <input type="text" name="fullname" required /></div>
-        <div>Username <input type="text" name="username" required /></div>
-        <div>Email <input type="text" name="email" required /></div>
-        <div>Password<input type="password" name="password" required /></div>
-        <div><input type="submit" name="signup" value="sign up" /></div>
-        <div><input type="hidden" name="operation" value="create" /></div>
+        
+        <input class="login_in" type="file" name="file" required />
+
+
+        <label><b>Name</b></label>
+        <input class="login_in" type="text" name="fullname" required />
+
+        <label for="uname"><b>Username</b></label>
+        <input class="login_in" type="text" name="username" required />
+
+        <label><b>Email</b></label>
+        <input class="login_in" type="text" name="email" required />
+
+
+        <label><b>Password</b></label>
+        <input class="login_in" type="password" name="password" required />
+
+        <label><b> </b></label>
+        <input class="b" type="submit" name="signup" value="sign up" />
+        <input type="hidden" name="operation" value="create" />
       </div>
     </form>
 
-    Have an account? <a href="/accounts/login/">Log in</a>
+    <div style="text-align: center;">
+    <a style="text-align: center;">
+      Have an account? <a href="/accounts/login/">Log in</a>
+    </a>
+  </div>
   </div>
 </body>
 

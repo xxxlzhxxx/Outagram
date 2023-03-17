@@ -157,7 +157,6 @@ export default function Post({ url }) {
   // Render post image and post owner
   if (dataLoaded) {
     return (
-
           <div className="post card mx-auto m-2" style={{ width: `${35}rem`}}>
             <div className="card-body row" style={{height:"2cm"}}>
 
@@ -173,11 +172,13 @@ export default function Post({ url }) {
                       alt={ownerGlobal}
                     />
                   </div>
-                  <div className="col-7  " style={{fontWeight:"bolder"}}>{ownerGlobal}</div>
+                  <div className="ownername" style={{fontWeight:"bolder"}}>
+                    {ownerGlobal}
+                  </div>
                 </a>
               </div>
 
-              <div className="col-6 offset-3">
+              <div className="time">
                 <a
                   href={`/posts/${postid}/`}
                   className="text-secondary fw-bold text-decoration-none"

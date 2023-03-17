@@ -328,12 +328,12 @@ function Post(_ref) {
       className: "post_img",
       alt: ownerGlobal
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-      className: "col-7  ",
+      className: "ownername",
       style: {
         fontWeight: "bolder"
       }
     }, ownerGlobal))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-      className: "col-6 offset-3"
+      className: "time"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
       href: "/posts/".concat(postid, "/"),
       className: "text-secondary fw-bold text-decoration-none"

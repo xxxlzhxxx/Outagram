@@ -23,5 +23,17 @@ ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 
+SECRET_KEY = 'my_precious'
+SECURITY_PASSWORD_SALT = 'my_precious_two'
+# Mail Settings
+
+MAIL_SERVER = "smtp.sjtu.edu.cn"
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_DEBUG = False
+MAIL_USERNAME = "lzh666@sjtu.edu.cn"
+MAIL_PASSWORD = "qwer20020613"
+MAIL_SSL_VERIFY = False # disable SSL verification
 # Database file is var/insta485.sqlite3
 DATABASE_FILENAME = INSTA485_ROOT / "var" / "insta485.sqlite3"

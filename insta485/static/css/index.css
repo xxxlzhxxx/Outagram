@@ -29,7 +29,13 @@
   text-decoration: none;
 }
 
+.time{
+  margin-left: 1cm;
+}
 
+.ownername {
+  margin-left: 0.5cm;
+}
 
 
 /* Full-width inputs */
@@ -98,6 +104,7 @@ img.avatar {
 /* Add padding to containers */
 .container {
   padding: 16px;
+  width: 40%;
 }
 
 /* The "Forgot password" text */

@@ -14,12 +14,16 @@ import pathlib
 import hashlib
 import os
 import flask
+import re
 from flask import (abort, redirect, request, send_from_directory, session,
                    url_for)
 import insta485
+from insta485 import *
 from insta485.utils import check_password, hash_password, save_current_file
 from insta485.utils import is_user_exists, get_file_path
-
+from itsdangerous import URLSafeTimedSerializer
+from flask_mail import Message
+import datetime
 
 
 def update_the_password(connection, destination):
@@ -109,10 +113,39 @@ def delete_this_account(connection, destination):
     connection.execute(
         "DELETE FROM users WHERE username == ?", [session["username"]]
     )
-
+    print("ok")
     # Clear session and redirect
     session.clear()
     return redirect(destination)
+
+def generate_confirmation_token(email):
+    serializer = URLSafeTimedSerializer(insta485.app.config["SECRET_KEY"])
+    return serializer.dumps(email, salt=insta485.app.config["SECURITY_PASSWORD_SALT"])
+
+
+
+
+def confirm_token(token, expiration=3600):
+    serializer = URLSafeTimedSerializer(insta485.app.config["SECRET_KEY"])
+    try:
+        email = serializer.loads(
+            token, salt=insta485.app.config["SECURITY_PASSWORD_SALT"], max_age=expiration
+        )
+        return email
+    except Exception:
+        return False
+
+
+def send_email(to, subject,template):
+    msg = Message(
+        subject,
+        recipients=[to],
+        sender="lzh666@sjtu.edu.cn",
+        html=template,
+    )
+    insta485.mail.send(msg)
+    return "message sent"
+
 
 
 def create_new_account(connection, destination):
@@ -127,6 +160,18 @@ def create_new_account(connection, destination):
     if username is None or password is None \
             or fullname is None or email is None:
         abort(400)
+    # check the form of the format of the regex regression
+    if not re.match(r"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", email):
+        abort(400)
+
+    subject = "Please confirm your email"
+    
+    html = flask.render_template("confirm_email.html")
+    token = generate_confirmation_token(email)
+    confirm_url = "qqq"
+    html = flask.render_template('confirm_email.html', confirm_url=confirm_url)
+    print(email)
+    send_email(email, subject, html)
 
     # Query to find username in database
     cur = connection.execute(
@@ -304,12 +349,18 @@ def edit():
 
     connection = insta485.model.get_db()
     cur = connection.execute(
-        "SELECT * FROM users WHERE username = ?", [session["username"]]
+        "SELECT filename, fullname, email FROM users "
+        "WHERE users.username = ?",
+        (session['username'],)
     )
-    user = cur.fetchone()
-
-    context = {"logname": session["username"], "user": user}
-    return flask.render_template("edit.html", **context)
+    dic = cur.fetchone()
+    print(dic)
+    filename = dic['filename']
+    fullname = dic['fullname']
+    email = dic['email']
+    return flask.render_template('edit.html', logname=session['username'],
+                           filename=filename,
+                           fullname=fullname, email=email)
 
 
 @insta485.app.route("/accounts/password/")

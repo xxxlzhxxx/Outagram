@@ -31,27 +31,40 @@
         <a>|</a>
     </span>
       <span class="button">
-        <a href="/users/{{ logname }}/">{{ logname }}</a>
+        <a href="/users/{{logname}}/">{{ logname }}</a>
       </span>
     </div>
   </nav>
 
   
-  <div style="padding-top: 2.5cm; padding-bottom: 0.5cm; z-index: -1;">
-  <img src="/uploads/{{ filename }}" alt=""> {{ logname }}
+  <div style="padding-top: 4.5cm; padding-bottom: 0.5cm; z-index: -1;">
+  <div style="text-align: center;">
+  <img src="/uploads/{{filename}}" alt="qewr"> 
 
+  <p style="font-size: larger; font-weight: 800;">{{ logname }}</p>
+  </div>
   <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
   <form action="/accounts/?target=/accounts/edit/" method="post" enctype="multipart/form-data">
-    <div class="container">
-    Photo <input type="file" name="file" accept="image/*" />
-    Name <input type="text" name="fullname" value="{{ user.fullname }}" required />
-    Email <input type="text" name="email" value="{{ user.email }}" required />
-    <input type="submit" name="update" value="submit" />
+    <div class="container" style="width: 40%;">
+    
+    <div style="margin-bottom: 0.5cm; margin-left: 35%; text-align: center;">
+      <input type="file" style=" width: 100%;" name="file" accept="image/*" />
+    </div>
+
+    <label for="uname"><b>Full Name</b></label>
+    <input class="login_in" type="text" name="fullname" value="{{ fullname }}" required />
+
+    <label for="uname"><b>Email</b></label>
+    <input class="login_in" type="text" name="email" value="{{ email }}" required />
+
+    <input class="b" type="submit" name="update" value="submit" />
     <input type="hidden" name="operation" value="edit_account" />
    
 </div>
-<a href="/accounts/password/"><b>Change password</b></a>
+<div style="text-align: center;">
+<a href="/accounts/password/"><b>Change password</b></a> or 
 <a href="/accounts/delete/"><b>Delete account</b></a>
+</div>
   </div>
   </form>
 
