@@ -32,8 +32,8 @@ MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 MAIL_DEBUG = False
-MAIL_USERNAME = "lzh666@sjtu.edu.cn"
-MAIL_PASSWORD = "qwer20020613"
+MAIL_USERNAME = xxx
+MAIL_PASSWORD = xxx
 MAIL_SSL_VERIFY = False # disable SSL verification
 # Database file is var/insta485.sqlite3
 DATABASE_FILENAME = INSTA485_ROOT / "var" / "insta485.sqlite3"
